@@ -17,22 +17,28 @@ nav {
 .main-container {
     border-radius: 10px;
     height: 100vh;
+    width: 80%;
     padding: 10px 20px;
+}
+
+.main-container * {
+    color: #dee2e6;
+    overflow: auto;
 }
 
 .nav-item {
     padding: 0px 10px !important;
     font-size: 1.5em;
     background: linear-gradient(to top left, #f772d1, #c872f2) !important;
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 10px;
-    font-family: Cabin;
+    font-family: Belanosima;
     line-height: 1;
-    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .glass-pane {
-    background-color: rgba(0, 1, 0, 0.55) !important;
+    background-color: rgba(0, 1, 0, 0.5) !important;
     filter: drop-shadow(0 10px 0.75rem black);
 }
 
@@ -42,6 +48,10 @@ nav {
         position: absolute;
         right: 10px;
         top: 5px;
+    }
+
+    .main-container {
+        width: 95%;
     }
 }
 
