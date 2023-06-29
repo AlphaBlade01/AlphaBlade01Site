@@ -1,0 +1,27 @@
+﻿
+#banner {
+    width: 80%;
+    padding: 3em;
+}
+
+@media (min-width: 500px) {
+    p {
+        font-size: 1.5em;
+        color: #c2c2c2;
+    }
+}
+
+.left-text {
+    text-align: left;
+    display: inline-block;
+}
+
+.icon {
+    border-radius: 10px;
+    margin: 10px;
+    height: 50px;
+}
+
+a {
+    text-decoration: none;
+}

@@ -2,7 +2,30 @@
     ViewData["Title"] = "Home";
 }
 
+
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <img id="banner" src="@Url.Content("~/assets/images/BannerForeground.png")" />
+    <h1>A little about me</h1>
+    <p>
+        I am a @((int.Parse(DateTime.Now.ToString("yyyyMMdd")) - 20061029)/10000) year old self-taught programmer from the UK, excelling in Roblox development, while also having created many projects outside of Roblox, now mainly specialising in C#.
+        I also enjoy modelling in Blender, and over the years have learnt to use photoshop.
+    </p>
+    <h1>Experience</h1>
+    <p class="left-text">
+        Programming/Scripting: <b>@(DateTime.Now.Year - 2018) years</b><br />
+        Modelling: <b>@(DateTime.Now.Year - 2020) years</b><br />
+        Photoshop: <b>@(DateTime.Now.Year - 2021) years</b>
+    </p>
+    <div>
+        <a href="https://twitter.com/Alpha_Blade01" target="_blank">
+            <img class="icon" src="@Url.Content("~/assets/images/twitter_logo.png")" />
+        </a>
+        <a href="https://github.com/AlphaBlade01" target="_blank">
+            <img class="icon" src="@Url.Content("~/assets/images/github_logo.png")" />
+        </a>
+        <a href="https://www.roblox.com/users/617276212/profile" target="_blank">
+            <img class="icon" src="@Url.Content("~/assets/images/roblox_logo.png")" />
+        </a>
+    </div>
 </div>
