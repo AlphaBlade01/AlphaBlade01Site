@@ -16,7 +16,7 @@ nav {
 
 .main-container {
     border-radius: 10px;
-    height: 100vh;
+    height: 100%;
     width: 80%;
     padding: 10px 20px;
 }
@@ -52,6 +52,7 @@ nav {
 
     .main-container {
         width: 95%;
+        height: 100%;
     }
 }
 
