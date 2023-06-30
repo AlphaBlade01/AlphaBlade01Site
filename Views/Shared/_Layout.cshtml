@@ -26,10 +26,10 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-light" href="mailto:alphablade0001@gmail.com?subject=Hiring%20Proposal" target="_top">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="mailto:alphablade0001@gmail.com?subject=Hiring%20Proposal" target="_top">Contact</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
                         </li>
                     </ul>
                 </div>
@@ -40,6 +40,7 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+        <small>Copyright &copy @DateTime.Now.Year AlphaBlade01</small>
     </div>
 
     @*<footer class="drop-shadow footer text-muted">
