@@ -1,0 +1,21 @@
+﻿@model AlphaBlade01.Logic.Models.FormProjectsModel
+
+<form action="/projects/add" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" asp-for="Name"/>
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" asp-for="Description"/>
+    </div>
+    <div class="form-group">
+        <label>Timestamp</label>
+        <input type="date" asp-for="DateUploaded"/>
+    </div>
+    <div class="form-group">
+        <label>Thumbnail</label>
+        <input type="file" asp-for="Thumbnail" accept="image/*"/>
+    </div>
+    <button type="submit">Submit</button>
+</form>

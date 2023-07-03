@@ -1,7 +1,14 @@
+using AlphaBlade01.Logic.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ProjectsContext>(context =>
+{
+    context.UseSqlite(@"Data Source = Data/projects.db");
+});
 
 var app = builder.Build();
 

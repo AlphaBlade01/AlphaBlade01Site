@@ -1,4 +1,4 @@
-namespace AlphaBlade01.Models
+namespace AlphaBlade01.Logic.Models
 {
     public class ErrorViewModel
     {
