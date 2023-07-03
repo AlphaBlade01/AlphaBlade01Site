@@ -1,4 +1,4 @@
-﻿using AlphaBlade01.Models;
+﻿using AlphaBlade01.Logic.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
