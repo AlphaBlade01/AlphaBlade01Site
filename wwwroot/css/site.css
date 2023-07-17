@@ -25,3 +25,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.btn-primary {
+    border-radius: 5px;
+    background-color: #f772d1 !important;
+    background: linear-gradient(to bottom right, #c872f2, transparent);
+    transition: background-color 0.5s;
+    border: none;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: aqua !important;
+}

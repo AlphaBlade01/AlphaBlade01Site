@@ -2964,7 +2964,8 @@ textarea.form-control-lg {
 
 .btn-primary {
   color: #fff;
-  background-color: #0d6efd;
+  background: linear-gradient(to top left, #f772d1, #c872f2) !important;
+  background-color: none !important;
   border-color: #0d6efd;
 }
 .btn-primary:hover {
