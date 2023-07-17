@@ -1,0 +1,12 @@
+﻿.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    font-size: 1.5em;
+}
+
+#submit-button {
+    padding: 2px 10px;
+    font-family: Cabin;
+}

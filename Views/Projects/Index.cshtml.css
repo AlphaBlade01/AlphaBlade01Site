@@ -1,0 +1,64 @@
+﻿h1 {
+    width: fit-content;
+    display: inline;
+    margin-right: 0.5em;
+}
+
+#add-button {
+    display: inline-block;
+    line-height: 1em;
+    font-size: 1.5em;
+    font-weight: bold;
+    height: 25px;
+    width: 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.project-tile {
+    position: relative;
+    display: inline-block;
+    border: double 2px transparent;
+    background-image: linear-gradient(white, white), radial-gradient(circle at top left, #b91cd9,#f772d1);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 0;
+}
+
+.thumbnail-wrapper {
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.project-thumbnail {
+    display: block;
+    height: 15em;
+    width: auto;
+}
+
+.project-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 0px 7px #000000;
+    color: #ffffff;
+    padding: 5px;
+    z-index: 1;
+    font-family: Cabin;
+    padding: 5px 10px;
+    border-radius: 0 0 5px;
+}
+
+.scrollable-x {
+    overflow-x: auto;
+    white-space: nowrap;
+}

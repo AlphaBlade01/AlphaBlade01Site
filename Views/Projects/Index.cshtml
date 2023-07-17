@@ -1,5 +1,21 @@
-﻿<h1>Projects</h1>
-<a href="/projects/add">
-	+
-</a>
-<span>Not implemented yet.</span>
+﻿@model System.Collections.Immutable.ImmutableArray<AlphaBlade01.Logic.Models.ProjectModel>
+
+<div class="container">
+	<h1>Projects</h1>
+	<a id="add-button" class="btn-primary" href="/projects/add">
+		+
+	</a>
+</div>
+
+
+<div class="container scrollable-x">
+	@foreach (ProjectModel project in Model)
+	{
+		<div class="project-tile">
+			<div class="thumbnail-wrapper">
+				<img class="project-thumbnail" src="projects/getprojectthumbnail?id=@(project.Id)" />
+			</div>
+			<label class="project-label">@project.Name</label>
+		</div>
+	}
+</div>

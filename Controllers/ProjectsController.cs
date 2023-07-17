@@ -1,6 +1,7 @@
 ﻿using AlphaBlade01.Logic.Contexts;
 using AlphaBlade01.Logic.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Immutable;
 
 namespace AlphaBlade01.Controllers
 {
@@ -16,7 +17,10 @@ namespace AlphaBlade01.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            using ProjectsContext db = new();
+            ImmutableArray<ProjectModel> projects = db.Set<ProjectModel>().ToImmutableArray();
+
+            return View("Index", projects);
         }
 
         public IActionResult Add()
@@ -27,6 +31,7 @@ namespace AlphaBlade01.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(FormProjectsModel httpModel)
         {
+            if (!ModelState.IsValid) return View();
             ProjectModel model = httpModel.CastToModel();
 
             if (model.DateUploaded == default)
@@ -40,12 +45,18 @@ namespace AlphaBlade01.Controllers
 
             if (httpModel.Thumbnail is not null)
             {
-                string fileExtension = Path.GetExtension(httpModel.Thumbnail.FileName);
-                using Stream fileStream = new FileStream($"{_hostingEnvironment.ContentRootPath}/wwwroot/assets/images/projects/{model.Id}{fileExtension}", FileMode.Create);
+                using Stream fileStream = new FileStream($"{_hostingEnvironment.ContentRootPath}/UploadedFiles/ProjectThumbnails/{model.Id}", FileMode.Create);
                 await httpModel.Thumbnail.CopyToAsync(fileStream);
             }
 
-            return View();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public FileResult GetProjectThumbnail(int id)
+        {
+            string filePath = _hostingEnvironment.ContentRootPath + "/UploadedFiles/ProjectThumbnails/" + id;
+            return new FileStreamResult(new FileStream(filePath, FileMode.Open), "image/*");
         }
     }
 }
