@@ -1,4 +1,7 @@
-﻿@model System.Collections.Immutable.ImmutableArray<AlphaBlade01.Logic.Models.ProjectModel>
+﻿@model ImmutableArray<ProjectModel>
+
+@using AlphaBlade01.Logic.Models;
+@using System.Collections.Immutable;
 
 <div class="container">
 	<h1>Projects</h1>
@@ -8,14 +11,24 @@
 </div>
 
 
-<div class="container scrollable-x">
-	@foreach (ProjectModel project in Model)
+<div class="main-container">
+	@foreach (ProjectType projectType in Enum.GetValues(typeof(ProjectType)))
 	{
-		<div class="project-tile">
-			<div class="thumbnail-wrapper">
-				<img class="project-thumbnail" src="projects/getprojectthumbnail?id=@(project.Id)" />
-			</div>
-			<label class="project-label">@project.Name</label>
+		if (Model.Where(project => project.ProjectType == projectType).Count() == 0) continue;
+
+		<h2>@projectType.ToString()</h2>
+		<div class="container scrollable-x">
+			@foreach (ProjectModel project in Model)
+			{
+				if (project.ProjectType != projectType) continue;
+
+				<div class="project-tile">
+					<div class="thumbnail-wrapper">
+						<img class="project-thumbnail" src="projects/getprojectthumbnail?id=@(project.Id)" />
+					</div>
+					<label class="project-label">@project.Name</label>
+				</div>
+			}
 		</div>
 	}
 </div>

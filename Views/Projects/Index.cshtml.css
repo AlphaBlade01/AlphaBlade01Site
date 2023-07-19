@@ -14,11 +14,16 @@
     border-radius: 5px;
     text-decoration: none;
     text-align: center;
+    user-select: none;
 }
 
 .container {
     display: flex;
     align-items: center;
+}
+
+.main-container {
+    padding: 0 20px;
 }
 
 .project-tile {
@@ -35,7 +40,6 @@
 
 .thumbnail-wrapper {
     overflow: hidden;
-    border-radius: 5px;
 }
 
 .project-thumbnail {
