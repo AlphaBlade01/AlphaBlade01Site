@@ -1,0 +1,21 @@
+﻿@using AlphaBlade01.Logic.Models.DTOs;
+@model InputUserModel
+
+<h1>Register</h1>
+
+<div class="container">
+	<form method="post" asp-controller="account" asp-action="register" enctype="multipart/form-data">
+		<div class="form-group">
+			<label class="form-label">UserName</label>
+			<input type="text" asp-for="UserName" class="form-control" />
+		</div>
+
+		<div class="form-group">
+			<label class="form-label">Password</label>
+			<input type="password" asp-for="Password" class="form-control" />
+			<span asp-validation-for="Password" class="text-danger"></span>
+		</div>
+
+		<button id="submit-button" class="btn-primary" type="submit">Submit</button>
+	</form>
+</div>
