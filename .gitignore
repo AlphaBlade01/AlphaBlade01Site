@@ -5,7 +5,6 @@
 
 # Changes at run time, so ignoring will prevent it affecting version control
 UploadedFiles/
-Data/
 
 # User-specific files
 *.rsuser
@@ -365,4 +364,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/Data/projects.db
+
+appsettings.json
