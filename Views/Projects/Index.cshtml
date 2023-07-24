@@ -1,6 +1,6 @@
-﻿@model ImmutableArray<ProjectModel>
+﻿@model ImmutableArray<ProjectDTO>
 
-@using AlphaBlade01.Logic.Models;
+@using AlphaBlade01.Logic.Models.DTOs;
 @using System.Collections.Immutable;
 
 <div class="container">
@@ -18,7 +18,7 @@
 
 		<h2>@projectType.ToString()</h2>
 		<div class="container scrollable-x">
-			@foreach (ProjectModel project in Model)
+			@foreach (ProjectDTO project in Model)
 			{
 				if (project.ProjectType != projectType) continue;
 

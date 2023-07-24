@@ -30,16 +30,18 @@
     position: relative;
     display: inline-block;
     border: double 2px transparent;
-    background-image: linear-gradient(white, white), radial-gradient(circle at top left, #b91cd9,#f772d1);
+    background-image: radial-gradient(circle at top left, #b91cd9,#f772d1);
     background-origin: border-box;
-    background-clip: padding-box, border-box;
+    background-clip: border-box;
     border-radius: 5px;
     margin: 10px;
     padding: 0;
+    overflow: hidden;
 }
 
 .thumbnail-wrapper {
     overflow: hidden;
+    border-radius: 3px;
 }
 
 .project-thumbnail {
