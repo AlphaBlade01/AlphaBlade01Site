@@ -20,6 +20,11 @@
     border-radius: 10px;
     margin: 10px;
     height: 50px;
+    transition-duration: 0.2s;
+}
+
+.icon:hover {
+    transform: translateY(-5px);
 }
 
 a {
