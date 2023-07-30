@@ -29,17 +29,20 @@ nav {
 .nav-item {
     padding: 0px 10px !important;
     font-size: 1.5em;
-    background: linear-gradient(to top left, #f772d1, #c872f2) !important;
+    /*background: linear-gradient(to top left, #f772d1, #c872f2) !important;*/
+    border: 1px solid rgb(106, 106, 106);
     border-radius: 10px;
     margin: 10px;
     font-family: Belanosima;
     line-height: 1;
     letter-spacing: 1px;
+    transition-duration: 0.5s;
+    text-align: center;
 }
 
-.glass-pane {
-    background-color: rgba(0, 1, 0, 0.5) !important;
-    filter: drop-shadow(0 10px 0.75rem black);
+.nav-item:hover {
+    border-color: rgb(200, 200, 200);
+    padding: 0px 20px !important;
 }
 
 @media (min-width: 500px) {
@@ -54,6 +57,11 @@ nav {
         width: 95%;
         height: 100%;
     }
+
+    #comments-menu {
+        width: 400px !important;
+    }
+
 }
 
 #navbar-logo {

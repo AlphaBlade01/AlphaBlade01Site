@@ -26,10 +26,10 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="mailto:alphablade0001@gmail.com?subject=Hiring%20Proposal" target="_top">Contact</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Index">Account</a>
                         </li>
                     </ul>
                 </div>
@@ -43,11 +43,9 @@
         <small>Copyright &copy @DateTime.Now.Year AlphaBlade01</small>
     </div>
 
-    @*<footer class="drop-shadow footer text-muted">
-        <div class="container">
-            &copy; 2023 - AlphaBlade01 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>*@
+
+        @await Component.InvokeAsync("Comments")
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
