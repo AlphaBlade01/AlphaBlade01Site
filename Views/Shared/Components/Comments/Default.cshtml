@@ -1,0 +1,41 @@
+﻿@using AlphaBlade01.Logic.Models.DTOs
+@using System.Security.Claims;
+@model List<CommentDTO>
+
+@{
+    string? authenticatedUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    Dictionary<int, string> commentAuthors = ViewBag.CommentAuthors;
+}
+
+
+<div id="comments-menu" class="side-menu" style="transform: translateX(100%);">
+    <div id="comments" class="side-menu-wrapper">
+        <button id="comments-btn">Comments</button>
+        <div id="comments-container" class="flex-column">
+            <div id="comments-header">
+                @if (authenticatedUserId is not null)
+                {
+                    <form method="post" asp-controller="Comment" asp-action="Create" id="comment-form" class="row">
+                        <input type="text" name="comment" class="rounded border-0" id="comment-input"/>
+                        <input type="submit" value="Publish" class="btn-primary" id="comment-publish-btn"/>
+                    </form>
+                } else
+                {
+                    <span class="text-light fw-bold">Please <a href="/account/login">Log In</a> to comment.</span>
+                }
+            </div>
+            
+            @foreach (CommentDTO comment in Model)
+            {
+                <div class="comment">
+                    <span class="text-light fw-bold">@commentAuthors.GetValueOrDefault(comment.Id)</span>
+                    <small class="text-secondary">@comment.Timestamp</small>
+                    <p class="text-light">@comment.Value</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script defer src="~/js/Shared/_Comments.js"></script>

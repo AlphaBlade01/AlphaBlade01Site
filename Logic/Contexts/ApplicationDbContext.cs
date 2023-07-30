@@ -49,4 +49,9 @@ namespace AlphaBlade01.Logic.Contexts
 	{
 		public DbSet<ProjectDTO> Projects { get; set; }
 	}
+
+	public partial class ApplicationDbContext
+	{
+		public DbSet<CommentDTO> Comments { get; set; }
+	}
 }
