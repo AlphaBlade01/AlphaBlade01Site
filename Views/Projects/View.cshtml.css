@@ -1,0 +1,18 @@
+﻿#thumbnail {
+    height: 15em;
+    width: auto;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.flex-item {
+    margin-top: 2em;
+}
+
+#timestamp {
+    color: rgb(128, 128, 128);
+}
+
+* {
+    font-family: Cabin;
+}

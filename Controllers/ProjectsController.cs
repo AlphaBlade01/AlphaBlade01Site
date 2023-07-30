@@ -24,6 +24,19 @@ namespace AlphaBlade01.Controllers
             return View("Index", projects);
         }
 
+        public async Task<IActionResult> View(int id)
+        {
+            ProjectDTO? project = await _context.Projects.FindAsync(id);
+
+            if (project is null)
+            {
+                ViewData["Error"] = "No such project exists in the database.";
+                return RedirectToAction("Index");
+            }
+
+            return View(project);
+        }
+
         [Authorize(Roles = "Admin")]
         public IActionResult Add()
         {

@@ -1,0 +1,11 @@
+﻿@using AlphaBlade01.Logic.Models.DTOs
+@model ProjectDTO
+
+<script defer src="@Url.Content("~/js/Account/View.js")"></script>
+
+<div class="container d-flex flex-column">
+	<h2 id="name" class="p-2">@Model.Name</h2>
+	<img id="thumbnail" class="align-self-center" src="/projects/getprojectthumbnail?id=@Model.Id" />
+	<p id="description" class="flex-item align-self-center">@Model.Description</p>
+	<small id="timestamp" class="flex-item align-self-end">@DateOnly.FromDateTime(Model.DateUploaded)</small>
+</div>
