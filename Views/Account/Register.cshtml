@@ -2,12 +2,14 @@
 @model InputUserModel
 
 <h1>Register</h1>
+<a href="/account/login">Log in instead.</a>
 
 <div class="container">
 	<form method="post" asp-controller="account" asp-action="register" enctype="multipart/form-data">
 		<div class="form-group">
 			<label class="form-label">UserName</label>
-			<input type="text" asp-for="UserName" class="form-control" />
+			<input type="text" asp-for="UserName" class="form-control">
+			<span asp-validation-for="UserName" class="text-danger"></span>
 		</div>
 
 		<div class="form-group">

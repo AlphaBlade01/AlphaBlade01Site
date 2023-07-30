@@ -2,12 +2,14 @@
 @model InputUserModel
 
 <h1>Login</h1>
+<a href="/account/register">Haven't yet registered?</a>
 
 <div class="container">
 	<form method="post" asp-controller="account" asp-action="login" enctype="multipart/form-data">
 		<div class="form-group">
 			<label class="form-label">UserName</label>
 			<input type="text" asp-for="UserName" class="form-control" />
+			<span asp-validation-for="UserName" class="text-danger"></span>
 		</div>
 
 		<div class="form-group">
@@ -15,6 +17,11 @@
 			<input type="password" asp-for="Password" class="form-control" />
 			<span asp-validation-for="Password" class="text-danger"></span>
 		</div>
+
+		@if (ViewData["Error"] is not null)
+		{
+			<h4 class="text-danger">@ViewData["Error"]</h4>
+		}
 
 		<button id="submit-button" class="btn-primary" type="submit">Submit</button>
 	</form>
