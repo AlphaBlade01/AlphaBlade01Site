@@ -1,0 +1,16 @@
+﻿.button-wrapper {
+    justify-content: center;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-family: Cabin;
+    display: inline-block;
+}
+
+p {
+    margin: 10px;
+}
