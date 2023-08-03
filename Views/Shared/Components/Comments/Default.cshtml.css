@@ -61,6 +61,8 @@
 
 .comment {
     z-index: 3;
+    position: relative;
+    overflow: hidden;
 }
 
 .comment > span {
@@ -90,4 +92,24 @@
 
 * {
     font-family: Cabin;
+}
+
+.delete-btn {
+    position: absolute;
+    height: 25px;
+    top: -25px;
+    right: -2px;
+    transform-origin: bottom right;
+    transform: rotate(-90deg) translateY(100%);
+    transition-duration: 0.3s;
+    background: linear-gradient(to top left, #f54269, #bf2434);
+    color: white;
+    border: none;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    justify-content: center;
+}
+
+.comment:hover > .delete-btn{
+    transform: rotate(-90deg) translateY(0);
 }

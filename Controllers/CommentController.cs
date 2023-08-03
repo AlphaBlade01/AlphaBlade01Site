@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
 using System.Security.Claims;
 
@@ -41,6 +42,28 @@ namespace AlphaBlade01.Controllers
             await _context.SaveChangesAsync();
 
             return Ok();
-        } 
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            CommentDTO? comment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (comment == null)
+                return NotFound();
+
+            if (userId is null)
+                return Unauthorized();
+
+            if ((!User.IsInRole("Admin")) && (comment.AuthorId != int.Parse(userId)))
+                return Forbid();
+
+            _context.Comments.Remove(comment);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }

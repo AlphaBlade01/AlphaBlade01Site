@@ -16,7 +16,7 @@
                 @if (authenticatedUserId is not null)
                 {
                     <form method="post" asp-controller="Comment" asp-action="Create" id="comment-form" class="row">
-                        <input type="text" name="comment" class="rounded border-0" id="comment-input"/>
+                        <input type="text" placeholder="Message as @User.Identity?.Name" name="comment" class="rounded border-0" id="comment-input"/>
                         <input type="submit" value="Publish" class="btn-primary" id="comment-publish-btn"/>
                     </form>
                 } else
@@ -27,10 +27,15 @@
             
             @foreach (CommentDTO comment in Model)
             {
-                <div class="comment">
+                <div class="comment" comment-id="@comment.Id">
                     <span class="text-light fw-bold">@commentAuthors.GetValueOrDefault(comment.Id)</span>
                     <small class="text-secondary">@comment.Timestamp</small>
                     <p class="text-light">@comment.Value</p>
+
+                    @if (User.Identity is not null && User.Identity.IsAuthenticated && (User.IsInRole("Admin") || (!User.IsInRole("Admin") & comment.AuthorId == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))))
+                    {
+                        <button class="delete-btn">Delete</button>                        
+                    }
                 </div>
             }
         </div>
