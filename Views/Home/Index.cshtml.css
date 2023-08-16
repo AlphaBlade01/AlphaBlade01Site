@@ -21,6 +21,7 @@
     margin: 10px;
     height: 50px;
     transition-duration: 0.2s;
+    user-select: none;
 }
 
 .icon:hover {
@@ -29,4 +30,9 @@
 
 a {
     text-decoration: none;
+    user-select: none;
+}
+
+img {
+    user-select: none;
 }
