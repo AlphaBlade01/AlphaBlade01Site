@@ -5,6 +5,11 @@
 <a href="/account/login">Log in instead.</a>
 
 <div class="container">
+	@if (ViewData["Error"] is not null)
+	{
+		<p class="text-danger">@ViewData["Error"]</p>
+	}
+
 	<form method="post" asp-controller="account" asp-action="register" enctype="multipart/form-data">
 		<div class="form-group">
 			<label class="form-label">UserName</label>
@@ -20,4 +25,4 @@
 
 		<button id="submit-button" class="btn-primary" type="submit">Submit</button>
 	</form>
-</div>
+</p>

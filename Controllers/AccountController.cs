@@ -60,6 +60,11 @@ namespace AlphaBlade01.Controllers
 		{
 			if (!ModelState.IsValid) return RedirectToAction(nameof(Register));
 			if ((bool)HttpContext.User.Identity?.IsAuthenticated) return Redirect("/");
+			if (_userManager.FindByNameAsync(userDto.UserName) is not null)
+			{
+				ViewData["Error"] = "User with this name already exists.";
+				return View();
+			}
 
 			UserDTO user = new UserDTO();
 			string hashedPassword = _passwordHasher.HashPassword(user, userDto.Password);
