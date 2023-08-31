@@ -60,11 +60,13 @@ a.btn-primary {
 
 ::-webkit-scrollbar {
     width: 7px;
+    background-color: rgba(0,0,0,1);
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
     background: #171717;
+    border-radius: 5px;
 }
 
 /* Handle */
