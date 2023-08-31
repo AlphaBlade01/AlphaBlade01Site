@@ -1,11 +1,10 @@
 @ECHO OFF
 
 dotnet publish -c Release
-ECHO "Compiled."
+ECHO Compiled
 
-ssh admin@raspberrypi "sudo rm -rf /var/www/alphablade01/*"
 scp -r  ./bin/Release/net7.0/publish/* admin@raspberrypi:/var/www/alphablade01/
-ECHO "Transferred."
+ECHO Transferred
 
 ssh admin@raspberrypi "sudo service alphablade01 restart"
-ECHO "Restarted server."
+ECHO Restarted server
