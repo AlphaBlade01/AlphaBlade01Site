@@ -1,5 +1,10 @@
 ﻿@using AlphaBlade01.Logic.Models.DTOs
+@using Microsoft.AspNetCore.StaticFiles;
 @model ProjectDTO
+
+@{
+	string[] previewNames = ViewBag.Previews;
+}
 
 <script defer src="@Url.Content("~/js/Account/View.js")"></script>
 
@@ -7,5 +12,27 @@
 	<h2 id="name" class="p-2">@Model.Name</h2>
 	<img id="thumbnail" class="align-self-center" src="/projects/getprojectthumbnail?id=@Model.Id" />
 	<p id="description" class="flex-item align-self-center">@Model.Description</p>
+
+	@if (previewNames != null && previewNames.Count() > 0)
+	{
+		<div id="previews-wrapper">
+			<h2>Previews</h2>
+			<div id="previews-container">
+				@foreach (string preview in previewNames)
+				{
+					new FileExtensionContentTypeProvider().TryGetContentType(preview, out string? contentType);
+
+					if (contentType?.StartsWith("image") ?? false)
+					{
+						<img class="preview" src="/projects/getprojectpreview?id=@(Model.Id)&fileName=@preview" />
+					} else if (contentType != null)
+					{
+						<video autoplay controls muted loop class="preview" src="/projects/getprojectpreview?id=@(Model.Id)&fileName=@preview"></video>
+					}
+				}
+			</div>
+		</div>
+	}
+
 	<small id="timestamp" class="flex-item align-self-end">@DateOnly.FromDateTime(Model.DateUploaded)</small>
 </div>

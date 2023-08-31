@@ -27,6 +27,7 @@ namespace AlphaBlade01.Logic.Models.DTOs
 	{
 		[Required(ErrorMessage = "Thumbnail is required")]
 		public IFormFile Thumbnail { get; set; }
+		public IFormFile[] Previews { get; set; }
 
 		public ProjectDTO CastToModel()
 		{

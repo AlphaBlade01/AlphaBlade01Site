@@ -9,10 +9,31 @@
     margin-top: 2em;
 }
 
+#description {
+    width: 85%;
+}
+
 #timestamp {
     color: rgb(128, 128, 128);
 }
 
 * {
     font-family: Cabin;
+}
+
+.preview {
+    height: 20em;
+    width: auto;
+    margin: 0px 5px 10px;
+}
+
+#previews-wrapper {
+    align-self: center;
+    width: 90%;
+}
+
+#previews-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
 }

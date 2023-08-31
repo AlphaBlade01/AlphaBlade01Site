@@ -2,12 +2,15 @@
 using AlphaBlade01.Logic.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using System.Collections.Immutable;
+using System.Web;
 
 namespace AlphaBlade01.Controllers
 {
 	public class ProjectsController : Controller
     {
+        private readonly string _uploadedFilesPath;
         private readonly IHostEnvironment _hostingEnvironment;
         private readonly ApplicationDbContext _context;
 
@@ -15,10 +18,11 @@ namespace AlphaBlade01.Controllers
         { 
             _hostingEnvironment = environment;
             _context = context;
-        }
+            _uploadedFilesPath = $"{_hostingEnvironment.ContentRootPath}/UploadedFiles";
+		}
 
 
-        public IActionResult Index()
+		public IActionResult Index()
         {
             ImmutableArray<ProjectDTO> projects = _context.Set<ProjectDTO>().ToImmutableArray();
             return View("Index", projects);
@@ -34,7 +38,8 @@ namespace AlphaBlade01.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(project);
+            ViewBag.Previews = Directory.EnumerateFiles($"{_uploadedFilesPath}/ProjectPreviews/{id}").Select(p => Path.GetFileName(p)).ToArray();
+			return View(project);
         }
 
         [Authorize(Roles = "Admin")]
@@ -58,8 +63,18 @@ namespace AlphaBlade01.Controllers
 
             if (httpModel.Thumbnail is not null)
             {
-                using Stream fileStream = new FileStream($"{_hostingEnvironment.ContentRootPath}/UploadedFiles/ProjectThumbnails/{model.Id}", FileMode.Create);
+                using Stream fileStream = new FileStream($"{_uploadedFilesPath}/ProjectThumbnails/{model.Id}", FileMode.Create);
                 await httpModel.Thumbnail.CopyToAsync(fileStream);
+            }
+
+            if (httpModel.Previews is not null && httpModel.Previews.Count() > 0)
+            {
+                DirectoryInfo previewDirectory = Directory.CreateDirectory($"{_uploadedFilesPath}/ProjectPreviews/{model.Id}");
+                foreach (IFormFile preview in httpModel.Previews)
+                {
+                    using Stream fileStream = new FileStream($"{previewDirectory.FullName}/{preview.FileName}", FileMode.Create);
+                    await preview.CopyToAsync(fileStream);
+                }
             }
 
             return RedirectToAction("Index");
@@ -68,8 +83,17 @@ namespace AlphaBlade01.Controllers
         [HttpGet]
         public FileResult GetProjectThumbnail(int id)
         {
-            string filePath = _hostingEnvironment.ContentRootPath + "/UploadedFiles/ProjectThumbnails/" + id;
+            string filePath = _uploadedFilesPath + "/ProjectThumbnails/" + id;
             return new FileStreamResult(new FileStream(filePath, FileMode.Open), "image/*");
+        }
+
+        [HttpGet]
+        public FileResult GetProjectPreview(int id, string fileName)
+        {
+            Console.WriteLine("{0} {1}", id, fileName);
+            new FileExtensionContentTypeProvider().TryGetContentType(fileName, out var contentType);
+            string filePath = $"{_uploadedFilesPath}/ProjectPreviews/{id}/{fileName}";
+            return new FileStreamResult(new FileStream(filePath, FileMode.Open), contentType ?? "image");
         }
     }
 }

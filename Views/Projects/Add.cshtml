@@ -34,5 +34,11 @@
         <span asp-validation-for="Thumbnail" class="text-danger"></span>
     </div>
 
+    <div class="form-group">
+        <label>Previews</label>
+        @Html.EditorFor(m => m.Previews)
+        <span asp-validation-for="Previews" class="text-danger"></span>
+    </div>
+
     <button id="submit-button" class="btn-primary" type="submit">Submit</button>
 </form>
