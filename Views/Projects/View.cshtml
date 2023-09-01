@@ -27,7 +27,7 @@
 						<img class="preview" src="/projects/getprojectpreview?id=@(Model.Id)&fileName=@preview" />
 					} else if (contentType != null)
 					{
-						<video autoplay controls muted loop class="preview" src="/projects/getprojectpreview?id=@(Model.Id)&fileName=@preview"></video>
+						<video autoplay controls muted loop disablePictureInPicture controlsList="nodownload noplaybackrate" class="preview" src="/projects/getprojectpreview?id=@(Model.Id)&fileName=@preview"></video>
 					}
 				}
 			</div>
