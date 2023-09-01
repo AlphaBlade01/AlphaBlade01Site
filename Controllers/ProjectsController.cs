@@ -38,7 +38,9 @@ namespace AlphaBlade01.Controllers
                 return RedirectToAction("Index");
             }
 
+            Directory.CreateDirectory($"{_uploadedFilesPath}/ProjectPreviews/{id}");
             ViewBag.Previews = Directory.EnumerateFiles($"{_uploadedFilesPath}/ProjectPreviews/{id}").Select(p => Path.GetFileName(p)).ToArray();
+
 			return View(project);
         }
 
