@@ -24,7 +24,7 @@ namespace AlphaBlade01.Controllers
 
 		public IActionResult Index()
         {
-            ImmutableArray<ProjectDTO> projects = _context.Set<ProjectDTO>().ToImmutableArray();
+            ImmutableArray<ProjectDTO> projects = _context.Set<ProjectDTO>().OrderByDescending(p => p.DateUploaded).ToImmutableArray();
             return View("Index", projects);
         }
 
