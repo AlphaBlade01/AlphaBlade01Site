@@ -1,0 +1,58 @@
+﻿@using AlphaBlade01.Logic.Models.DTOs
+@model InputProjectModel
+
+<script defer src="~/js/Projects/Media.js"></script>
+
+<form class="form" action="/projects/edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+
+    <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" asp-for="Name" value="@Model.Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" type="text" asp-for="Description">@Model.Description</textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Project Type</label>
+        <select class="form-control" asp-for="ProjectType" >
+            @foreach (string name in Enum.GetNames(typeof(ProjectType)))
+            {
+                if (Model.ProjectType.ToString() == name) 
+                {
+                    <option value="@name" selected>@name</option>
+                } else
+                {
+                    <option value="@name">@name</option>
+                }
+
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Timestamp</label>
+        <input class="form-control" type="date" asp-for="DateUploaded" value="@Model.DateUploaded.ToString("yyyy-MM-dd")" />
+    </div>
+
+    <div class="form-group">
+        <label>Thumbnail</label>
+        <input class="form-control" type="file" asp-for="Thumbnail" accept="image/*" />
+        <img id="thumbnail-preview" class="preview" src="/projects/getprojectthumbnail?id=@Model.Id"/>
+        <span asp-validation-for="Thumbnail" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Previews</label>
+        @Html.EditorFor(m => m.Previews)
+        <div id="previews-container"> <img class="meta" /> </div>
+        <span asp-validation-for="Previews" class="text-danger"></span>
+    </div>
+
+    <button id="submit-button" class="btn-primary" type="submit">Submit</button>
+</form>

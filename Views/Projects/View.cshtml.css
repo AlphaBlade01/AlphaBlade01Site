@@ -40,3 +40,7 @@
     overflow-x: auto;
     align-items: center;
 }
+
+#edit-btn {
+    float: right;
+}

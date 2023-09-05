@@ -3,6 +3,7 @@ using AlphaBlade01.Logic.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Immutable;
 using System.Web;
 
@@ -21,6 +22,21 @@ namespace AlphaBlade01.Controllers
             _uploadedFilesPath = $"{_hostingEnvironment.ContentRootPath}/UploadedFiles";
 		}
 
+        private async Task SaveThumbnail(int id, IFormFile thumbnail)
+        {
+            using Stream fileStream = new FileStream($"{_uploadedFilesPath}/ProjectThumbnails/{id}", FileMode.Create);
+            await thumbnail.CopyToAsync(fileStream);
+        }
+
+        private async Task SavePreviews(int id, IFormFile[] previews)
+        {
+            DirectoryInfo previewDirectory = Directory.CreateDirectory($"{_uploadedFilesPath}/ProjectPreviews/{id}");
+            foreach (IFormFile preview in previews)
+            {
+                using Stream fileStream = new FileStream($"{previewDirectory.FullName}/{preview.FileName}", FileMode.Create);
+                await preview.CopyToAsync(fileStream);
+            }
+        }
 
 		public IActionResult Index()
         {
@@ -51,6 +67,17 @@ namespace AlphaBlade01.Controllers
         }
 
         [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(int id)
+        {
+            ProjectDTO? project = await _context.Projects.FindAsync(id);
+
+            if (project is null) 
+                return NotFound();
+
+            return View(new InputProjectModel(project));
+        }
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Add(InputProjectModel httpModel)
         {
@@ -64,22 +91,39 @@ namespace AlphaBlade01.Controllers
             _context.SaveChanges();
 
             if (httpModel.Thumbnail is not null)
-            {
-                using Stream fileStream = new FileStream($"{_uploadedFilesPath}/ProjectThumbnails/{model.Id}", FileMode.Create);
-                await httpModel.Thumbnail.CopyToAsync(fileStream);
-            }
+                await SaveThumbnail(model.Id, httpModel.Thumbnail);
 
             if (httpModel.Previews is not null && httpModel.Previews.Count() > 0)
-            {
-                DirectoryInfo previewDirectory = Directory.CreateDirectory($"{_uploadedFilesPath}/ProjectPreviews/{model.Id}");
-                foreach (IFormFile preview in httpModel.Previews)
-                {
-                    using Stream fileStream = new FileStream($"{previewDirectory.FullName}/{preview.FileName}", FileMode.Create);
-                    await preview.CopyToAsync(fileStream);
-                }
-            }
+                await SavePreviews(model.Id, httpModel.Previews);
 
             return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> Edit(InputProjectModel inputProjectModel)
+        {
+            ProjectDTO? project = await _context.FindAsync<ProjectDTO>(inputProjectModel.Id);
+
+            if (project == null) return NotFound();
+
+            if (inputProjectModel.DateUploaded == default)
+                inputProjectModel.DateUploaded = DateTime.Now.ToUniversalTime();
+
+            project.Name = inputProjectModel.Name;
+            project.Description = inputProjectModel.Description;
+            project.DateUploaded = inputProjectModel.DateUploaded;
+            project.ProjectType = inputProjectModel.ProjectType;
+
+            _context.SaveChanges();
+
+            if (inputProjectModel.Thumbnail is not null)
+                await SaveThumbnail(project.Id, inputProjectModel.Thumbnail);
+
+            if (inputProjectModel.Previews is not null && inputProjectModel.Previews.Count() > 0)
+                await SavePreviews(project.Id, inputProjectModel.Previews);
+
+            return RedirectToAction("View", new { id = inputProjectModel.Id });
         }
 
         [HttpGet]

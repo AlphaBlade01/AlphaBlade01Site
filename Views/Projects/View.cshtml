@@ -9,7 +9,13 @@
 <script defer src="@Url.Content("~/js/Account/View.js")"></script>
 
 <div class="container d-flex flex-column">
-	<h2 id="name" class="p-2">@Model.Name</h2>
+	<div id="topbar" class="row align-items-center">
+		<h2 id="name" class="col">@Model.Name</h2>
+		@if (User.Identity?.IsAuthenticated == true && User.IsInRole("Admin"))
+		{
+			<a id="edit-btn" class="btn-primary col-auto" href="/projects/edit/@Model.Id">Edit</a>
+		}
+	</div>
 	<img id="thumbnail" class="align-self-center" src="/projects/getprojectthumbnail?id=@Model.Id" />
 	<p id="description" class="flex-item align-self-center">@Model.Description</p>
 
