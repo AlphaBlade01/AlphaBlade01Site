@@ -3,6 +3,9 @@
 
 <script defer src="~/js/Projects/Media.js"></script>
 
+<img class="meta" id="meta-img" />
+<video class="meta" id="meta-vid"></video>
+
 <form class="form" action="/projects/edit" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" value="@Model.Id" />
 
@@ -50,7 +53,7 @@
     <div class="form-group">
         <label>Previews</label>
         @Html.EditorFor(m => m.Previews)
-        <div id="previews-container"> <img class="meta" /> </div>
+        <div id="previews-container"></div>
         <span asp-validation-for="Previews" class="text-danger"></span>
     </div>
 

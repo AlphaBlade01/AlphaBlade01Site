@@ -2,7 +2,8 @@
 const previews_input = document.getElementById("Previews");
 const thumbnail_preview = document.getElementById("thumbnail-preview");
 const previews_container = document.getElementById("previews-container");
-const meta_img = previews_container.getElementsByClassName("meta")[0];
+const meta_img = document.getElementById("meta-img");
+const meta_vid = document.getElementById("meta-vid");
 
 thumbnail_input.onchange = (event) => {
     const reader = new FileReader();
@@ -11,20 +12,17 @@ thumbnail_input.onchange = (event) => {
 };
 
 previews_input.onchange = (event) => {
-    while (meta_img.nextSibling) {
-        meta_img.nextSibling.remove();
+    previews_container.replaceChildren([]);
+
+    for (const file of event.target.files) {
+        const reader = new FileReader();
+        const childNode = file["type"].startsWith("image") ? meta_img.cloneNode() : meta_vid.cloneNode();
+
+        childNode.removeAttribute("id");
+        childNode.className = "preview"
+        previews_container.appendChild(childNode);
+
+        reader.onload = () => childNode.src = reader.result;
+        reader.readAsDataURL(file);
     }
-
-    setTimeout(() => {
-        for (const file of event.target.files) {
-            const reader = new FileReader();
-            const img_element = meta_img.cloneNode();
-
-            img_element.className = "preview"
-            previews_container.appendChild(img_element);
-
-            reader.onload = () => img_element.src = reader.result;
-            reader.readAsDataURL(file);
-        }
-    }, 2000);
 }
