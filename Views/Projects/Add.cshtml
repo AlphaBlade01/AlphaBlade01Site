@@ -1,6 +1,8 @@
 ﻿@using AlphaBlade01.Logic.Models.DTOs
 @model InputProjectModel
 
+<script defer src="~/js/Projects/Media.js"></script>
+
 <form class="form" action="/projects/add" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label>Name</label>
@@ -31,12 +33,14 @@
     <div class="form-group">
         <label>Thumbnail</label>
         <input class="form-control" type="file" asp-for="Thumbnail" accept="image/*" />
+        <img id="thumbnail-preview" class="preview" />
         <span asp-validation-for="Thumbnail" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label>Previews</label>
         @Html.EditorFor(m => m.Previews)
+        <div id="previews-container"> <img class="meta" /> </div>
         <span asp-validation-for="Previews" class="text-danger"></span>
     </div>
 
