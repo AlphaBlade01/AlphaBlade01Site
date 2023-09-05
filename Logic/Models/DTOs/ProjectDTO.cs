@@ -29,6 +29,17 @@ namespace AlphaBlade01.Logic.Models.DTOs
 		public IFormFile Thumbnail { get; set; }
 		public IFormFile[] Previews { get; set; }
 
+		public InputProjectModel() { }
+
+		public InputProjectModel(ProjectDTO project) 
+		{
+			Id = project.Id;
+			Name = project.Name;
+			Description = project.Description;
+			DateUploaded = project.DateUploaded;
+			ProjectType = project.ProjectType;
+		}
+
 		public ProjectDTO CastToModel()
 		{
 			return new ProjectDTO() { Id = Id, Name = Name, Description = Description, DateUploaded = DateUploaded, ProjectType = ProjectType };
